@@ -106,15 +106,17 @@
                             </thead>
 
                             <tbody>
-                            {% for ara in personel %}
+                            {% for ara in personelliste %}
 
                                 <tr>
                                     <td align='center'>
-                                        <form><input type=button
-                                                     value="Seç"
+                                        <form action="{% url 'sec' %}" method="GET" id="formsec">
+                                            <input type=button
+                                                     value={{ ara.tc }}
                                                      data-toggle="collapse"
                                                      data-target="#onizlem"
-                                                     style="width:100%">
+                                                     style="width:100%"
+                                            name="qq">
                                         </form>
                                     </td>
                                     <td>{{ ara.isim }}</td>
@@ -140,22 +142,39 @@
 
     </div>
 </div>
+
 <div class="row">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                Kişi Detayları
-            </div>
-            <div class="card-body">
-                <div class="media">
-                    <img src="{% static "fihrist/ibb_zabita.jpg" %}" alt="Picture of Rango"/> <!-- Images -->
-                    <div class="media-body">
+    <div class="col-lg-12">
+        <h5><span class="badge badge-secondary">Bulunan Personel</span></h5>
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="..." class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        {% for ara in personeltek %}
+
+
+                            <td>{{ ara.sicil }}</td>
+                            <td>{{ ara.tc }}</td>
+
+                            <h4 class="card-title"> {{ ara.isim }}</h4>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                                additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">{{ ara.adres }}</small></p>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
