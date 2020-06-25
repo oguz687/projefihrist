@@ -52,7 +52,7 @@ class Personel(models.Model):
     sicil = models.IntegerField()
     adres = models.TextField()
     tc = models.CharField(max_length=11)
-    foto = models.ImageField()
+    foto = models.ImageField(upload_to="fihrist/")
     mudurluk = models.ForeignKey(Mudurluk, on_delete=models.CASCADE, related_name='mudurlukr', )
     amirlik = models.ForeignKey(Amirlik, on_delete=models.CASCADE, related_name='amirlikr')
     amirlik_yetki = models.ForeignKey(AmirlikYetki, on_delete=models.CASCADE, related_name='amirr')
