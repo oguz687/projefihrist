@@ -22,6 +22,15 @@ def page(request):
     # print("yetki 0")
     return HttpResponse(template.render(context, request))
 
+def sec(request):
+    template = loader.get_template('fihrist/index.html')
+    query = request.GET.get('qq')
+
+    personelliste = Personel.objects.get(tc__exact=query)
+    context = {
+        'personelliste': personelliste,
+    }
+    return HttpResponse(template.render(context, request))
 
 def results(request):
     template = loader.get_template('fihrist/base.html')
