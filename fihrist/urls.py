@@ -5,5 +5,5 @@ urlpatterns = [
  # post views
  path('', views.page, name='fihrist'),
  path('search/', views.results, name='results'),
- path('sec/',views.sec,name='sec'),
+ path('search/',views.sec,name='sec'),
 ]

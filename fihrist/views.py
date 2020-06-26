@@ -23,13 +23,14 @@ def page(request):
     return HttpResponse(template.render(context, request))
 
 def sec(request):
-    template = loader.get_template('fihrist/index.html')
+    template = loader.get_template('fihrist/base.html')
     query = request.GET.get('qq')
 
-    personelliste = Personel.objects.get(tc__exact=query)
+    personeltek = Personel.objects.get(sicil__exact=query)
     context = {
-        'personelliste': personelliste,
+        'personeltek': personeltek,
     }
+
     return HttpResponse(template.render(context, request))
 
 def results(request):
