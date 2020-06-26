@@ -4,7 +4,7 @@
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-3">
-                <div class="card" id="personelarama">
+                <div class="card border-info" id="personelarama">
                     <div class="card-header">
                         Personel Arama Ekranı
                     </div>
@@ -41,10 +41,10 @@
                     <div class="card-footer col-md-6" id="personelaramafooter">
                         <div class="row">
                             <div class="col-lg-12">
-                                <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                                <input class="btn btn-primary border-light" type="submit" id="submitbuton"
                                        form="formresult" value="Ara">
                                 <input class="btn btn-success border-light" type="submit" id="yenibuton"
-                                       form="formresult" onclick="sifirlama()" value="Yeni">
+                                       form="formresult" onclick="sifirlama()" value="Sıfırla">
 
                             </div>
                             <script>
@@ -61,13 +61,13 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="card">
+                <div class="card border-info">
                     <h5><span class="badge badge-secondary">Bulunan Personel</span></h5>
 
                     <div
-                            class="table-responsive-lg table-responsive-md table-responsive-sm pre-scrollable table-info table-striped table-bordered table-hover ">
+                            class="table-responsive-lg table-responsive-md table-responsive-sm pre-scrollable table-danger table-striped table-bordered table-hover ">
                         <table>
-                            <thead>
+                            <thead class="thead-info">
                             <tr>
                                 <th scope="col">Seç</th>
 

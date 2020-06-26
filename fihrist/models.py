@@ -50,6 +50,7 @@ class Mudurluk(models.Model):
 class Personel(models.Model):
     isim = models.CharField(max_length=200, unique=True)
     sicil = models.IntegerField()
+    telefon = models.IntegerField()
     adres = models.TextField()
     tc = models.CharField(max_length=11)
     foto = models.ImageField(upload_to="fihrist/")
