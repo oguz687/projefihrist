@@ -10,11 +10,11 @@ from fihrist.models import Personel
 
 
 # def get_queryset(self):  # new
-#     template = loader.get_template('fihrist/index.html')
+#     template = loader.get_template('fihrist/base.html')
 #     return self.model.objects.filter(isim__icontains="Deneme")
 #
 def page(request):
-    template = loader.get_template('fihrist/index.html')
+    template = loader.get_template('fihrist/base.html')
     personel = Personel.objects.all()
     context = {
         'personel': personel,
@@ -24,7 +24,7 @@ def page(request):
 
 
 def results(request):
-    template = loader.get_template('fihrist/index.html')
+    template = loader.get_template('fihrist/base.html')
     # personel = Personel.objects.all()
     query = request.GET.get('q')
     personel = Personel.objects.filter(Q(isim__icontains=query) | Q(tc__icontains=query)|Q(sicil__icontains=query))
