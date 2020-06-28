@@ -1,121 +1,124 @@
 {% block content %}
 
-<div class="row mb-2">
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="card border-info" id="personelarama">
-                    <div class="card-header">
-                        Personel Arama Ekranı
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
+    <div class="row mb-2">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card border-info" id="personelarama">
+                        <div class="card-header">
+                            Personel Arama Ekranı
+                        </div>
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
-                                    <form action="{% url 'results' %}" method="GET" id="formresult">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form action="{% url 'results' %}" method="GET" id="formresult">
 
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="input-group mb-1">
-                                                    <div class="input-group-prepend">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="input-group mb-1">
+                                                        <div class="input-group-prepend">
                                                         <span class="input-group-text pb-0 pt-0"
                                                               id="">İsim,Tc,Sicil</span>
+                                                        </div>
+                                                        <label for="qu"></label>
+                                                        <input id="qu" name="q" type="search" placeholder="Ara...">
                                                     </div>
-                                                    <label for="qu"></label>
-                                                    <input id="qu" name="q" type="search" placeholder="Ara...">
                                                 </div>
+
                                             </div>
+                                        </form>
 
-                                        </div>
-                                    </form>
 
+                                    </div>
 
                                 </div>
 
                             </div>
 
+
                         </div>
+                        <div class="card-footer col-md-6" id="personelaramafooter">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="btn btn-primary border-light" type="submit" id="submitbuton"
+                                           form="formresult" value="Ara">
+                                    <input class="btn btn-success border-light" type="submit" id="yenibuton"
+                                           form="formresult" onclick="sifirlama()" value="Sıfırla">
 
-
-                    </div>
-                    <div class="card-footer col-md-6" id="personelaramafooter">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <input class="btn btn-primary border-light" type="submit" id="submitbuton"
-                                       form="formresult" value="Ara">
-                                <input class="btn btn-success border-light" type="submit" id="yenibuton"
-                                       form="formresult" onclick="sifirlama()" value="Sıfırla">
-
+                                </div>
+                                {#                            <script>#}
+                                {#                                function sifirlama() {#}
+                                {#                                    document.getElementById("formresult").reset();#}
+                                {#                                }#}
+                                {##}
+                                {##}
+                                {#                            </script>#}
                             </div>
-                            <script>
-                                function sifirlama() {
-                                    document.getElementById("formresult").reset();
-                                }
 
 
-                            </script>
                         </div>
-
-
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="card border-info">
-                    <h5><span class="badge badge-secondary">Bulunan Personel</span></h5>
+                <div class="col-lg-9">
+                    <div class="card border-info">
+                        <h5><span class="badge badge-secondary">Bulunan Personel</span></h5>
 
-                    <div
-                            class="table-responsive-lg table-responsive-md table-responsive-sm pre-scrollable table-danger table-striped table-bordered table-hover ">
-                        <table>
-                            <thead class="thead-info">
-                            <tr>
-                                <th scope="col">Seç</th>
-
-                                <th scope="col">İsim</th>
-
-                                <th scope="col">Sicil</th>
-                                <th scope="col">TC</th>
-                                <th scope="col">Adres</th>
-
-
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            {% for ara in personel %}
-
+                        <div
+                                class="table-responsive-lg table-responsive-md table-responsive-sm pre-scrollable table-danger table-striped table-bordered table-hover ">
+                            <table>
+                                <thead class="thead-info">
                                 <tr>
-                                    <td align='center'>
-                                         <form action="{% url 'sec' %}" method="GET" id="formsec">
-                                            <input type=submit
-                                                     value={{ ara.sicil}}
-                                                     data-toggle="collapse"
-                                                     data-target={{ ara.sicil }}
-                                                     style="width:100%"
-                                                        name="qq">
-                                        </form>
-                                    </td>
-                                    <td>{{ ara.isim }}</td>
-                                    <td>{{ ara.sicil }}</td>
-                                    <td>{{ ara.tc }}</td>
-                                    <td>{{ ara.foto }}</td>
+                                    <th scope="col">Seç</th>
+
+                                    <th scope="col">İsim</th>
+
+                                    <th scope="col">Sicil</th>
+                                    <th scope="col">TC</th>
+                                    <th scope="col">Adres</th>
 
 
                                 </tr>
+                                </thead>
 
-                            {% endfor %}
+                                <tbody>
+                                {% for ara in personel %}
 
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <td align='center'>
 
+
+                                            <form action="{% url 'sec' %}" method="GET" id="formsec">
+                                                <input type=submit
+                                                       value={{ ara.sicil }}
+                                                               placeholder="seç"
+                                                       data-target={{ ara.sicil }}
+                                                               style="width:100%"
+                                                       name="qq" id="secc">
+                                            </form>
+
+                                        </td>
+                                        <td>{{ ara.isim }}</td>
+                                        <td>{{ ara.sicil }}</td>
+                                        <td>{{ ara.tc }}</td>
+                                        <td>{{ ara.foto }}</td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
+
                 </div>
 
             </div>
 
+
         </div>
-
-
     </div>
-</div>
 {% endblock %}
