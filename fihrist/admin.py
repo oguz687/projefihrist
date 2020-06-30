@@ -9,11 +9,11 @@ from fihrist.models import Personel, Yetki, MudurlukYetki, AmirlikYetki, Mudurlu
 #     list_display = ['isim', 'sicil','tc','adres','mudurluk','amirlik','yetki','amirlik_yetki','mudurluk_yetki','foto']
 
 class PersonelAdmin(admin.ModelAdmin):
-    list_display = ('isim', 'sicil','tc','adres','mudurluk','amirlik','yetki','amirlik_yetki','mudurluk_yetki','foto')
+    list_display = ('isim', 'sicil','tc','adres','foto')
 
 admin.site.register(Personel,PersonelAdmin)
-admin.site.register(Yetki)
-admin.site.register(MudurlukYetki)
-admin.site.register(AmirlikYetki)
-admin.site.register(Mudurluk)
-admin.site.register(Amirlik)
+# admin.site.register(Yetki)
+# admin.site.register(MudurlukYetki)
+# admin.site.register(AmirlikYetki)
+# admin.site.register(Mudurluk)
+# admin.site.register(Amirlik)

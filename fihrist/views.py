@@ -9,7 +9,7 @@ from django.template import loader
 from django.views.generic import ListView, TemplateView
 from numpy.random.mtrand import random
 
-from fihrist.models import Personel, Amirlik, Mudurluk
+from fihrist.models import Personel, Amirlik, Mudurluk, AmirlikYetki, MudurlukYetki
 
 
 # def get_queryset(self):  # new
@@ -55,19 +55,53 @@ def results(request):
     return HttpResponse(template.render(context, request))
 
 
+def amirlik(args):
+    amirlik = Amirlik.objects.get_or_create(amirlik="Soyisimler")
+    return amirlik
+
+
+
+def mudurluk(args):
+    mudurluk = Mudurluk.objects.get_or_create(mudurluk="Sehir")
+    return mudurluk
+
+
+def amirlikyetki(args):
+    amirlikyetki=AmirlikYetki.objects.get_or_create(amirlik_yetki=False)
+    return amirlikyetki
+
+
+def mudurlukyetki(args):
+    mudurlukyetki = MudurlukYetki.objects.get_or_create(mudurluk_yetki=False)
+    return mudurlukyetki
+
+
 def ekle(request):
     from pathlib import Path
     import pandas as pd
 
     from fihrist.models import Personel
 
-    pathd = Path("C:\\Users\\atessu\\Desktop\\xx\\calisan_data.csv")
+    pathd = Path("C:\\Users\\oguzhan.ozturk\\Desktop\\xx\\calisan_data.csv")
     data = pd.read_csv(pathd)
     data2 = pd.DataFrame(data,
                          columns=['Isimler', 'Soyisimler', 'TelefonTuru', 'Departman', 'Sehir', 'DogumTarihi', 'Maas',
                                   'Telefon', 'mail'])
-    personel = Personel.objects.get_or_create(isim=data2["Isimler"], sicil=randint(1, 10000),
-                                              telefon=randint(1, 1000000),
-                                              amirlik=Amirlik(amirlik=data2["Soyisimler"]),
-                                              mudurluk=Mudurluk(mudurluk=data2["Departman"])
-                                              , tc=data2["Telefon"], adres=data2["Departman"])
+
+
+
+    objs = [
+        Personel(
+            # amirlik=Amirlik(amirlik=amirlik), mudurluk=Mudurluk(mudurluk=mudurluk),
+            isim=row["Isimler"], sicil=randint(1, 100000000),
+            telefon=randint(1, 100000000),
+            tc=row["Telefon"], adres=row["Departman"],
+            # amirlik_yetki=AmirlikYetki(amirlik_yetki=amirlikyetki),
+            # mudurluk_yetki_id=1,amirlik_yetki_id=2,yetki_id=3,mudurluk_yetki=MudurlukYetki(mudurluk_yetki=mudurlukyetki)
+        )
+        for index, row in data2.head(n=data2.size).iterrows()
+    ]
+    msg = Personel.objects.bulk_create(objs=objs)
+
+
+    return HttpResponse(print("rew"))
