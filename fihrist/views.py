@@ -1,16 +1,22 @@
+import io
 from random import randint
 
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.template import loader
 from django.views.generic import ListView, TemplateView
+from django.views.generic.base import View
 from numpy.random.mtrand import random
+from reportlab.pdfgen import canvas
 
 from fihrist.models import Personel, Amirlik, Mudurluk, AmirlikYetki, MudurlukYetki
-
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
 
 # def get_queryset(self):  # new
 #     template = loader.get_template('fihrist/base.html')
@@ -60,14 +66,13 @@ def amirlik(args):
     return amirlik
 
 
-
 def mudurluk(args):
     mudurluk = Mudurluk.objects.get_or_create(mudurluk="Sehir")
     return mudurluk
 
 
 def amirlikyetki(args):
-    amirlikyetki=AmirlikYetki.objects.get_or_create(amirlik_yetki=False)
+    amirlikyetki = AmirlikYetki.objects.get_or_create(amirlik_yetki=False)
     return amirlikyetki
 
 
@@ -88,8 +93,6 @@ def ekle(request):
                          columns=['Isimler', 'Soyisimler', 'TelefonTuru', 'Departman', 'Sehir', 'DogumTarihi', 'Maas',
                                   'Telefon', 'mail'])
 
-
-
     objs = [
         Personel(
             # amirlik=Amirlik(amirlik=amirlik), mudurluk=Mudurluk(mudurluk=mudurluk),
@@ -103,5 +106,89 @@ def ekle(request):
     ]
     msg = Personel.objects.bulk_create(objs=objs)
 
-
     return HttpResponse(print("rew"))
+
+
+def some_view(request):
+    # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+
+    # FileResponse sets the Content-Disposition header so that browsers
+    # present the option to save the file.
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
+
+
+# from io import BytesIO
+# from django.http import HttpResponse
+# from django.template.loader import get_template
+#
+# from xhtml2pdf import pisa
+#
+#
+# def render_to_pdf(template_src, context_dict={}):
+#     template = get_template(template_src)
+#     html = template.render(context_dict)
+#     result = BytesIO()
+#     pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
+#     if not pdf.err:
+#         return HttpResponse(result.getvalue(), content_type='application/pdf')
+#     return None
+#
+#
+# def pdf(request):
+#     template = get_template('fihrist/deneme.html')
+#     context = {
+#         'pagesize': 'A4',
+#
+#     }
+#     html = template.render(context)
+#     pdf = render_to_pdf('fihrist/pdf/deneme.html', context)
+#     if pdf:
+#         response = HttpResponse(pdf, content_type='application/pdf')
+#         filename = "Invoice_%s.pdf" % "12341231"
+#         content = "inline; filename='%s'" % filename
+#         download = request.GET.get("download")
+#         if download:
+#             content = "attachment; filename='%s'" % filename
+#         response['Content-Disposition'] = content
+#         return response
+#     return HttpResponse("Not found")
+
+
+
+
+
+def pdf(request):
+    """Generate pdf."""
+    # Model data
+    # people = Personel.objects.all().order_by('mail')
+
+    # Rendered
+    html_string = render_to_string('fihrist/pdf/deneme.html', {'people': "fdgfg"})
+    html = HTML(string=html_string)
+    result = html.write_pdf()
+
+    # Creating http response
+    response = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition'] = 'inline; filename=list_people.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'r')
+        response.write(output.read())
+
+    return response
