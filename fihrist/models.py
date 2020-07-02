@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from random import randint
 
 from django.db import models

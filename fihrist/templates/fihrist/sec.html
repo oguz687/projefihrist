@@ -1,6 +1,6 @@
 {% block sec %}
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <h5><span class="badge badge-secondary mx-4">Personel Bilgileri</span></h5>
 
             <div class="card mb-4 border-info" style="min-height: 20em;">
@@ -9,8 +9,8 @@
 
                         <div class="col-md-2 mx-4 my-4">
 
-                                <img src="{{ personeltek.foto.url }}" style="width: 10em; height:10em;" class="card-img"
-                                     alt="...">
+                            <img src="{{ personeltek.foto.url }}" style="width: 10em; height:10em;" class="card-img"
+                                 alt="...">
 
                         </div>
                         <div class="col-md-6">
@@ -22,12 +22,33 @@
                                 <h5>TC No: {{ personeltek.tc }}</h5>
 
                                 <p class="card-text">Departman: {{ personeltek.adres }}</p>
-                                <p class="card-text"><small class="text-muted">Telefon:   {{ personeltek.telefon }}</small></p>
+                                <p class="card-text"><small
+                                        class="text-muted">Telefon: {{ personeltek.telefon }}</small></p>
                             </div>
                         </div>
+
+                        </div>
+
                     {% endif %}
 
-                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <h5><span class="badge badge-secondary ">Formlar</span></h5>
+            <div class="card mb-4 border-info" style="min-height: 20em;">
+                    <form action="{% url 'pdf' %}" method="GET" id="formpdf">
+                        <input type=hidden
+                               value={{ personeltek.sicil }}
+                                       placeholder="seç"
+                               data-target={{ personeltek.sicil }}
+                                       style="width:100%"
+                               name="qt">
+                    </form>
+                    <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                           form="formpdf" value="Askerlik Üst Yazı">
+
 
             </div>
 

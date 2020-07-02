@@ -1,12 +1,16 @@
+# -*- coding: utf-8 -*-
+
 import io
 from random import randint
-
+from django.utils.encoding import uri_to_iri
+from django.utils.encoding import iri_to_uri
 from django.db.models import Q
 from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.template import loader, RequestContext
+from django.utils.encoding import smart_str
 from django.views.generic import ListView, TemplateView
 from django.views.generic.base import View
 from numpy.random.mtrand import random
@@ -49,6 +53,7 @@ def results(request):
     template = loader.get_template('fihrist/base.html')
     # personel = Personel.objects.all()
     query = request.GET.get('q')
+    print(query)
     personel = Personel.objects.filter(Q(isim__icontains=query) | Q(tc__icontains=query) | Q(sicil__icontains=query))
     # if request.method == 'GET':
     #     query = request.GET.get('q')
@@ -89,7 +94,13 @@ def ekle(request):
     from fihrist.models import Personel
 
     pathd = Path("C:\\Users\\oguzhan.ozturk\\Desktop\\xx\\calisan_data.csv")
-    data = pd.read_csv(pathd)
+    patht = Path("C:\\Users\\atessu\\Desktop\\xx\\calisan_data.csv")
+
+    if patht.is_file():
+        data = pd.read_csv(patht)
+    else:
+        data=pd.read_csv(pathd)
+
     data2 = pd.DataFrame(data,
                          columns=['Isimler', 'Soyisimler', 'TelefonTuru', 'Departman', 'Sehir', 'DogumTarihi', 'Maas',
                                   'Telefon', 'mail'])
@@ -170,6 +181,7 @@ def some_view(request):
 
 
 def pdf(request):
+
     """Generate pdf."""
     # Model data
     # people = Personel.objects.all().order_by('mail')
@@ -198,7 +210,10 @@ def pdf(request):
     # return HttpResponse(template.render(context, request))
 
     # html_template = get_template('fihrist/pdf/deneme5.html')
-    personel = Personel.objects.filter(isim__icontains="ahmet")
+    template = loader.get_template('fihrist/base.html')
+
+    query = request.GET.get('qt')
+    personel = Personel.objects.get(sicil__exact=query)
     context = {
         'personel': personel,
     }
