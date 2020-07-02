@@ -6,7 +6,7 @@ from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.template import loader
+from django.template import loader, RequestContext
 from django.views.generic import ListView, TemplateView
 from django.views.generic.base import View
 from numpy.random.mtrand import random
@@ -189,9 +189,22 @@ def pdf(request):
     #     with open(output.name, 'r') as x:
     #         response.write(output.read())
     #         return response
+    # template = loader.get_template('fihrist/base.html')
+    # personel = Personel.objects.all()
+    # context = {
+    #     'personel': personel,
+    # }
+    # # print("yetki 0")
+    # return HttpResponse(template.render(context, request))
 
-    html_template = render_to_string('fihrist/pdf/deneme.html')
-    pdf_file = HTML(string=html_template).write_pdf()
+    # html_template = get_template('fihrist/pdf/deneme5.html')
+    personel = Personel.objects.filter(isim__icontains="ahmet")
+    context = {
+        'personel': personel,
+    }
+    html_template2 = render_to_string('fihrist/pdf/deneme5.html',context,request=request)
+    # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
+    pdf_file = HTML(string=html_template2).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
     response['Content-Disposition'] = 'filename="home_page.pdf"'
     return response
