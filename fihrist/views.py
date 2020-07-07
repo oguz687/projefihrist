@@ -27,7 +27,16 @@ import tempfile
 #     template = loader.get_template('fihrist/base.html')
 #     return self.model.objects.filter(isim__icontains="Deneme")
 #
+
+
 def page(request):
+    template = loader.get_template('fihrist/base.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def hepsi(request):
     template = loader.get_template('fihrist/base.html')
     personel = Personel.objects.all()
     context = {
@@ -101,7 +110,7 @@ def ekle(request):
     if patht.is_file():
         data = pd.read_csv(patht)
     else:
-        data=pd.read_csv(pathd)
+        data = pd.read_csv(pathd)
 
     data2 = pd.DataFrame(data,
                          columns=['Isimler', 'Soyisimler', 'TelefonTuru', 'Departman', 'Sehir', 'DogumTarihi', 'Maas',
@@ -182,36 +191,7 @@ def some_view(request):
 #     return HttpResponse("Not found")
 
 
-def pdf(request):
-
-    """Generate pdf."""
-    # Model data
-    # people = Personel.objects.all().order_by('mail')
-
-    # Rendered
-    # html_string = render_to_string('fihrist/pdf/deneme.html', {'people': "fdgfg"})
-    # html = HTML(string=html_string)
-    # result = html.write_pdf()
-    #
-    # # Creating http response
-    # response = HttpResponse(content_type='application/pdf;')
-    # response['Content-Disposition'] = 'inline; filename=list_people.pdf'
-    # response['Content-Transfer-Encoding'] = 'binary'
-    # with tempfile.NamedTemporaryFile(delete=True) as output:
-    #     output.write(result)
-    #     output.flush()
-    #     with open(output.name, 'r') as x:
-    #         response.write(output.read())
-    #         return response
-    # template = loader.get_template('fihrist/base.html')
-    # personel = Personel.objects.all()
-    # context = {
-    #     'personel': personel,
-    # }
-    # # print("yetki 0")
-    # return HttpResponse(template.render(context, request))
-
-    # html_template = get_template('fihrist/pdf/deneme5.html')
+def askerlikdilekce(request):
     template = loader.get_template('fihrist/base.html')
 
     query = request.GET.get('qt')
@@ -219,9 +199,25 @@ def pdf(request):
     context = {
         'personel': personel,
     }
-    html_template2 = render_to_string('fihrist/pdf/deneme5.html',context,request=request)
+    html_template2 = render_to_string('fihrist/pdf/deneme5.html', context, request=request)
     # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
     pdf_file = HTML(string=html_template2).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="home_page.pdf"'
+    response['Content-Disposition'] = 'filename="askerlik_dilekce.pdf"'
+    return response
+
+
+def askerlikustyazi(request):
+    template = loader.get_template('fihrist/base.html')
+
+    query = request.GET.get('qo')
+    personel = Personel.objects.get(sicil__exact=query)
+    context = {
+        'personel': personel,
+    }
+    html_template2 = render_to_string('fihrist/pdf/askerlikform.htm', context, request=request)
+    # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
+    pdf_file = HTML(string=html_template2).write_pdf()
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="askerlik_ustyazi.pdf"'
     return response

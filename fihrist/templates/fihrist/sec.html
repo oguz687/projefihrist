@@ -34,27 +34,169 @@
 
 
             </div>
-        <div class="col-lg-6 pull-right">
-            <div class="card mb-4 border-info" style="min-height: 20em;">
-                <div class="card-header"><h4><span class="badge badge-secondary ">Formlar</span></h4>
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <div class="card mb-4 border-info" style="min-height: 20em;">
+                        <div class="card-header"><h4><span class="badge badge-secondary ">Formlar</span></h4>
+                        </div>
+                        <form action="{% url 'askerlikustyazi' %}" method="GET" id="formpdf">
+                            <input type=hidden
+                                   value={{ personeltek.sicil }}
+                                           style="width:100%"
+                                   name="qo">
+
+
+                        </form>
+
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                            Askerlik Formları
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                                               form="formpdf" value="Askerlik Üst Yazı" data-toggle="modal"
+                                               data-target="#formpdf">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+Diğer Askerlik Formları                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+Diğer Askerlik Formları                                       </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree" aria-expanded="false"
+                                                aria-controls="collapseThree">
+                                        Diğer Askerlik Formları
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-                <form action="{% url 'pdf' %}" method="GET" id="formpdf">
-                    <input type=hidden
-                           value={{ personeltek.sicil }}
-                                   placeholder="seç"
-                           data-target={{ personeltek.sicil }}
+                <div class="col-lg-6 ">
+                    <div class="card mb-4 border-info" style="min-height: 20em;">
+                        <div class="card-header"><h4><span class="badge badge-secondary ">Üst Yazılar</span></h4>
+                        </div>
+                        <form action="{% url 'askerlikdilekce' %}" method="GET" id="formpdf">
+                            <input type=hidden
+                                   value={{ personeltek.sicil }}
+                                           data-target={{ personeltek.sicil }}
                                    style="width:100%"
-                           name="qt">
+                                   name="qt">
 
 
-                </form>
-                <input class="btn btn-success border-light" type="submit" id="submitbuton"
-                       form="formpdf" value="Askerlik Üst Yazı" data-toggle="modal" data-target="#exampleModalLong">
+                        </form>
+
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                            Askerlik Üstyazıları
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                                               form="formpdf" value="Askerlik Üst Yazı" data-toggle="modal"
+                                               data-target="#formpdf">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                            Diğer Askerlik Üstyazıları
+
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <form action="{% url 'askerlikustyazi' %}" method="GET" id="formpdf">
+                                            <input type=submit
+                                                   value={{ personeltek.sicil }}
+                                                           placeholder="seç"
+                                                   data-target={{ personeltek.sicil }}
+                                                           style="width:100%"
+                                                   name="qt">
+                                        </form>
+                                        <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                                               form="formpdf" value="Askerlik Üst Yazı">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree" aria-expanded="false"
+                                                aria-controls="collapseThree">
+                                            Diğer Askerlik Üstyazıları
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
 
             </div>
-
         </div>
 
-        </div>
+
+    </div>
     </div>
 {% endblock %}
