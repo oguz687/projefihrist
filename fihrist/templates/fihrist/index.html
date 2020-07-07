@@ -15,14 +15,25 @@
 
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="input-group mb-1">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text pb-0 pt-0"
-                                                              id="">İsim,Tc,Sicil</span>
+                                                <form class="form-inline">
+
+
+                                                    <label class="sr-only"
+                                                           for="inlineFormInputGroupUsername2">Ara</label>
+                                                    <div class="input-group mb-2 mr-sm-2">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text " style="background-color: lightskyblue">İsim,Tc,Sicil</div>
+                                                        </div>
+                                                        <input type="text" class="form-control"
+                                                               id="inlineFormInputGroupUsername2"
+                                                               placeholder="Ara"
+                                                               name="q"
+                                                        >
                                                     </div>
-                                                    <label for="q"></label>
-                                                    <input name="q" type="search" placeholder="Ara...">
-                                                </div>
+
+
+                                                </form>
+
                                             </div>
 
                                         </div>
@@ -66,7 +77,7 @@
                             <table>
                                 <thead class="thead-info">
                                 <tr>
-                                                                        <th scope="col">Seç</th>
+                                    <th scope="col">Seç</th>
 
 
                                     <th scope="col">İsim</th>
@@ -91,11 +102,13 @@
                                                        value={{ ara.sicil }}
                                                                placeholder="seç"
                                                        data-target="submitbuton"
-                                                               style="width:100%"
-                                                       name="qq">
+                                                       name="qq"
+                                                >
+                                                <input class="btn btn-success border-light" type="submit"
+                                                       id="submitbuton"
+                                                       form="formsec" value="Seç">
                                             </form>
-                                            <input class="btn btn-success border-light" type="submit" id="submitbuton"
-                       form="formsec" value="Seç">
+
 
                                         </td>
                                         <td>{{ ara.isim }}</td>
