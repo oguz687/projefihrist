@@ -86,16 +86,17 @@
                                         <td align='center'>
 
 
-                                            <form action="{% url 'sec' %}" method="GET" id="formsec">
-                                                <input type=hidden
+                                            <form action="{% url 'sec' %}" method="GET" id="formsec" name="formsecc">
+                                                {{ ara.sicil }}
+                                                <input type=submit
                                                        value={{ ara.sicil }}
                                                                placeholder="seç"
                                                        data-target="submitbuton"
                                                                style="width:100%"
                                                        name="qq">
+
                                             </form>
-                                            <input class="btn btn-success border-light" type="submit" id="submitbuton"
-                       form="formsec" value="Seç">
+
 
                                         </td>
                                         <td>{{ ara.isim }}</td>

@@ -39,9 +39,11 @@ def page(request):
 
 def sec(request):
     template = loader.get_template('fihrist/base.html')
+
     query = request.GET.get('qq')
 
     personeltek = Personel.objects.get(sicil__exact=query)
+    form = request.GET.get('formsecc')
     context = {
         'personeltek': personeltek,
     }
