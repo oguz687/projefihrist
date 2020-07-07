@@ -196,8 +196,10 @@ def askerlikdilekce(request):
 
     query = request.GET.get('qt')
     personel = Personel.objects.get(sicil__exact=query)
+    tarih=request.GET.get('ayrilistarihi')
     context = {
         'personel': personel,
+        'ayrilistarihi':tarih,
     }
     html_template2 = render_to_string('fihrist/pdf/deneme5.html', context, request=request)
     # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
@@ -215,7 +217,7 @@ def askerlikustyazi(request):
     context = {
         'personel': personel,
     }
-    html_template2 = render_to_string('fihrist/pdf/askerlikform.htm', context, request=request)
+    html_template2 = render_to_string('fihrist/pdf/deneme5.html', context, request=request)
     # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
     pdf_file = HTML(string=html_template2).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')

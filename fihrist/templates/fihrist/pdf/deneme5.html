@@ -1,5 +1,3 @@
-
-
 <html>
 
 <head>
@@ -64,10 +62,9 @@
 
 <body lang=TR>
 
-    {% if personel %}
+{% if personel %}
 
-<div class=WordSection1>
-
+    <div class=WordSection1>
 
 
         <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
@@ -95,13 +92,13 @@ YAKASI ZABITA MÜDÜRLÜĞÜNE</span></b></p>
 
         <p class=MsoNormal align=center style='text-align:center'><b><span
                 style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>&nbsp;</span></b></p>
-
-        <p class=MsoNormal style='text-align:justify;text-indent:35.4pt'><span
-                style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'> 
-Askerlik görevimi yapmak üzere, sevk tarihim olan 09.03.2020 tarihinden itibaren
+        {% if ayrilistarihi %}
+            <p class=MsoNormal style='text-align:justify;text-indent:35.4pt'><span
+                    style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'> 
+Askerlik görevimi yapmak üzere, sevk tarihim olan {{ ayrilistarihi }} tarihinden itibaren
 ücretsiz izne ayrılmak istiyorum. Gerekli işlemlerin yapılmasını arz ederim.                                     </span>
-        </p>
-
+            </p>
+        {% endif %}
         <p class=MsoNormal style='text-align:justify;text-indent:35.4pt'><span
                 style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
 
@@ -158,8 +155,8 @@ justify'><b><span
                 style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>Telefonu: {{ personel.telefon }}</span></b>
         </p>
 
-        </div>
-    {% endif %}
+    </div>
+{% endif %}
 
 </body>
 
