@@ -39,14 +39,14 @@
                     <div class="card mb-4 border-info" style="min-height: 20em;">
                         <div class="card-header"><h4><span class="badge badge-secondary ">Formlar</span></h4>
                         </div>
-                        <form action="{% url 'askerlikustyazi' %}" method="GET" id="formpdf">
-                            <input type=hidden
-                                   value={{ personeltek.sicil }}
-                                           style="width:100%"
-                                   name="qo">
-
-
-                        </form>
+{#                        <form action="{% url 'askerlikdilekce' %}" method="GET" id="formpdf">#}
+{#                            <input type=search#}
+{#                                   value={{ personeltek.sicil }}#}
+{#                                           style="width:100%"#}
+{#                                   name="qt">#}
+{##}
+{##}
+{#                        </form>#}
 
                         <div class="accordion" id="accordionExample">
                             <div class="card">
@@ -64,13 +64,8 @@
                                      data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-lg-12 mb-4">
-                                                 <input class="btn btn-success border-light" type="submit" id="submitbuton"
-                                               form="formpdf" value="Askerlik Dilekçesi" data-toggle="modal"
-                                               data-target="#formpdf">
-                                        <br>
-                                            </div>
-                                            <form action="{% url 'askerlikdilekce' %}" method="GET" name="ayrilistarih">
+
+                                            <form action="{% url 'askerlikdilekce' %}" method="GET" name="ayrilistarihi">
                                                 <div class="col-lg-12">
                                                  <div class="form-group row">
                                             <label for="example-date-input" class="col-2 col-form-label">Ayrılış Tarihi </label>
@@ -81,6 +76,12 @@
                                         </div>
                                             </div>
                                             </form>
+                                            <div class="col-lg-12 mb-4">
+                                                 <input class="btn btn-success border-light" type="submit" id="submitbuton"
+                                               form="ayrilistarihi" value="Askerlik Dilekçesi" data-toggle="modal"
+                                               data-target="#formpdf">
+                                        <br>
+                                            </div>
 
                                         </div>
 
@@ -176,7 +177,7 @@
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                      data-parent="#accordionExample">
                                     <div class="card-body">
-                                        <form action="{% url 'askerlikustyazi' %}" method="GET" id="formpdf">
+                                        <form action="{% url 'askerlikustyazi' %}" method="GET" id="formpdfw">
                                             <input type=submit
                                                    value={{ personeltek.sicil }}
                                                            placeholder="seç"
@@ -185,7 +186,7 @@
                                                    name="qt">
                                         </form>
                                         <input class="btn btn-success border-light" type="submit" id="submitbuton"
-                                               form="formpdf" value="Askerlik Üst Yazı">
+                                               form="formpdfw" value="Askerlik Üst Yazı">
                                     </div>
                                 </div>
                             </div>

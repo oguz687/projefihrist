@@ -217,7 +217,7 @@ def askerlikustyazi(request):
     context = {
         'personel': personel,
     }
-    html_template2 = render_to_string('fihrist/pdf/deneme5.html', context, request=request)
+    html_template2 = render_to_string('fihrist/pdf/askerlikform.htm', context, request=request)
     # html_template = render_to_string('fihrist/pdf/deneme5.html',{'personel' : personel.foto})
     pdf_file = HTML(string=html_template2).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
